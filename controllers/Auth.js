@@ -60,12 +60,14 @@ const Login=async(req,res)=>{
         })
     }
     const token=jwt.sign({userId:checkUser._id},process.env.SECRET_KEY)
-    res.cookie("token",token,{
-        //for secure purpose
-            httpOnly:true,
-           secure:false,
-           maxAge:3 * 24 * 60 * 60 * 1000//after 3 days token will be expired
-    })
+
+    const isProd = process.env.NODE_ENV === 'production';
+res.cookie('token', token, {
+  httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? 'None' : 'Lax',
+  maxAge: 3 * 24 * 60 * 60 * 1000,
+});
     res.status(200).json({
         success:true,
         message:"Loged in successfully",
