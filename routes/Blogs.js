@@ -1,0 +1,10 @@
+const express=require("express")
+const { createBlog, deleteBlog, getposts, updatepost } = require("../controllers/Blogs")
+const { isAdmin } = require("../middleware/isAdmin")
+const upload = require("../middleware/Multer")
+const BlogsRoutes=express.Router()
+BlogsRoutes.post("/create",isAdmin,upload.single("postimage"),createBlog)
+BlogsRoutes.get("/getposts",getposts)
+BlogsRoutes.delete("/delete/:id",isAdmin,deleteBlog)
+BlogsRoutes.patch("/update/:id",isAdmin,upload.single("postimage"),updatepost)
+module.exports=BlogsRoutes
