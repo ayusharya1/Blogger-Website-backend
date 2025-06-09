@@ -5,7 +5,7 @@ const path=require("path")
 const cookieParser=require("cookie-parser")
 const cors=require("cors")
 const corsOption={//to send cookies to frontend
-    origin:true,
+    origin:"https://fantastic-gumption-c8cb50.netlify.app/",
     credentials:true
 }
 app.use(cors(corsOption))
