@@ -63,8 +63,7 @@ const Login=async(req,res)=>{
     res.cookie("token",token,{
         //for secure purpose
             httpOnly:true,
-           secure:true,
-            sameSite: "None",
+           secure:false,
            maxAge:3 * 24 * 60 * 60 * 1000//after 3 days token will be expired
     })
     res.status(200).json({
